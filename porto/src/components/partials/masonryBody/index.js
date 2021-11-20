@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { ToastContainer, toast } from 'react-toastify';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -6,9 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import CertifModal from '../../elements/Modal';
+
 export const MasonryLayout = (props) => {
     const notifyEmail = () => toast.error('bayudha.bd@gmail.com');
     const notifyWhatsapp = () => toast.success('082222217661');
+
+    const arrayCer = [
+        'aws1',
+        'aws2',
+        'be_expert',
+        'fe_expert',
+        'ibm',
+        'mern',
+        'PWA',
+    ];
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [theName, setTheName] = useState();
 
     const aboutRefContainer = useRef(null);
     const expeRefContainer = useRef(null);
@@ -18,7 +33,6 @@ export const MasonryLayout = (props) => {
 
     useEffect(() => {
         function hiddenHidden() {
-            console.log(props.toChild);
             if (props.toChild.about === 1) {
                 aboutRefContainer.current.classList.remove('hidden');
 
@@ -645,94 +659,51 @@ export const MasonryLayout = (props) => {
                                 pagination: false,
                                 arrowPath: pathSvgArrow,
                                 width: 474,
+                                autoplay: true,
+                                pauseOnHover: true,
+                                resetProgress: false,
+                                type: 'loop',
+                                interval: 4000,
+                                classes: {},
                             }}
                             className="ml-2"
                         >
                             <SplideSlide>
                                 <div className="bg-white h-80 p-16 flex justify-center items-center">
                                     <div>
-                                        <h1 className="font-bold text-center text-3xl">
-                                            Tools
+                                        <h1 className="font-bold  text-3xl">
+                                            Certificate
                                         </h1>
-                                        <p className="pt-4 font-light text-center text-sm">
-                                            These are my favorite tools that i'm
-                                            using
+                                        <p className="pt-4 font-light  text-sm">
+                                            These are my certificate from
+                                            participating course and workshop
                                         </p>
                                     </div>
                                 </div>
                             </SplideSlide>
-                            <SplideSlide>
-                                <div className="bg-white h-80 p-16 flex justify-center items-center">
-                                    <div>
-                                        <img
-                                            src={`${process.env.PUBLIC_URL}/assets/img/vscode.png`}
-                                            alt="tools"
-                                            style={{
-                                                height: 100,
-                                                width: 'auto',
-                                            }}
-                                            className="mx-auto"
-                                        />
-                                        <h1 className="font-bold pt-6 text-center text-xl text-gray-900">
-                                            Visual Studio Code
-                                        </h1>
-                                    </div>
-                                </div>
-                            </SplideSlide>
-                            <SplideSlide>
-                                <div className="bg-white h-80 p-16 flex justify-center items-center">
-                                    <div>
-                                        <img
-                                            src={`${process.env.PUBLIC_URL}/assets/img/figma.png`}
-                                            alt="tools"
-                                            style={{
-                                                height: 100,
-                                                width: 'auto',
-                                            }}
-                                            className="mx-auto"
-                                        />
-                                        <h1 className="font-bold pt-6 text-center text-xl text-gray-900">
-                                            Figma
-                                        </h1>
-                                    </div>
-                                </div>
-                            </SplideSlide>
-                            <SplideSlide>
-                                <div className="bg-white h-80 p-16 flex justify-center items-center">
-                                    <div>
-                                        <img
-                                            src={`${process.env.PUBLIC_URL}/assets/img/postman.png`}
-                                            alt="tools"
-                                            style={{
-                                                height: 100,
-                                                width: 'auto',
-                                            }}
-                                            className="mx-auto"
-                                        />
-                                        <h1 className="font-bold pt-6 text-center text-xl text-gray-900">
-                                            Postman
-                                        </h1>
-                                    </div>
-                                </div>
-                            </SplideSlide>
-                            <SplideSlide>
-                                <div className="bg-white h-80 p-16 flex justify-center items-center">
-                                    <div>
-                                        <img
-                                            src={`${process.env.PUBLIC_URL}/assets/img/term.png`}
-                                            alt="tools"
-                                            style={{
-                                                height: 100,
-                                                width: 'auto',
-                                            }}
-                                            className="mx-auto"
-                                        />
-                                        <h1 className="font-bold pt-6 text-center text-xl text-gray-900">
-                                            Terminal
-                                        </h1>
-                                    </div>
-                                </div>
-                            </SplideSlide>
+                            {arrayCer.map((item, index) => {
+                                return (
+                                    <SplideSlide>
+                                        <div className="bg-white h-80 p-16 flex justify-center items-center">
+                                            <div>
+                                                <img
+                                                    src={`${process.env.PUBLIC_URL}/assets/img/${item}.png`}
+                                                    alt="tools"
+                                                    style={{
+                                                        height: 200,
+                                                        width: 'auto',
+                                                    }}
+                                                    className="mx-auto cursor-pointer filter shadow-md"
+                                                    onClick={() => {
+                                                        setIsOpen(true);
+                                                        setTheName(item);
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </SplideSlide>
+                                );
+                            })}
                         </Splide>
                     </div>
                 </div>
@@ -755,11 +726,11 @@ export const MasonryLayout = (props) => {
                             backgroundSize: '100% 100%',
                         }}
                     >
-                        <div>
-                            <h2 className="text-white text-2xl font-bold">
+                        <div className="p-3 lg:p-0">
+                            <h2 className="text-white text-xl lg:text-2xl font-bold">
                                 Hello people
                             </h2>
-                            <p className="text-white text-base font-light pt-2">
+                            <p className="text-white text-sm lg:text-base font-light pt-2">
                                 I would be very happy to be a part of your
                                 journey and reach the goals together.
                                 <br />
@@ -817,6 +788,11 @@ export const MasonryLayout = (props) => {
                     </div>
                 </div>
             </div>
+            <CertifModal
+                isItOpen={isOpen}
+                changeOpen={setIsOpen}
+                nameModal={theName}
+            />
         </div>
     );
 };

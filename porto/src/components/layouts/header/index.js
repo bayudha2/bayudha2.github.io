@@ -60,7 +60,7 @@ export const LayoutHeader = (props) => {
                             props.sendToParent({ tools: counterTool + 1 });
                         }}
                     >
-                        Tools
+                        Certificate
                     </Button>
                 </div>
             </div>
