@@ -43,7 +43,7 @@ function CertifModal({ isItOpen, changeOpen, nameModal }) {
                             <div className="inline-block w-full max-w-4xl my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl ">
                                 <div className="mt-2">
                                     <img
-                                        src={`${process.env.PUBLIC_URL}/assets/img/${nameModal}.PNG`}
+                                        src={`${process.env.PUBLIC_URL}/assets/img/${nameModal}.png`}
                                         alt="certif"
                                     />
                                 </div>
